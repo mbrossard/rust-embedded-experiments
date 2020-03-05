@@ -6,12 +6,9 @@ extern crate cortex_m_rt;
 extern crate panic_halt;
 extern crate stm32f4;
 
-use stm32f4::stm32f411;
-use cortex_m_rt::entry;
-
-#[entry]
+#[cortex_m_rt::entry]
 fn main() -> ! {
-    let peripherals = stm32f411::Peripherals::take().unwrap();
+    let peripherals = stm32f4::stm32f411::Peripherals::take().unwrap();
     let gpioc = &peripherals.GPIOC;
     let rcc = &peripherals.RCC;
 
