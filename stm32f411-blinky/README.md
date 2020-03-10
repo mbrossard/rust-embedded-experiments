@@ -50,11 +50,29 @@ This step requires the program [dfu-util](http://dfu-util.sourceforge.net/) to b
 - Check that the device is accessible:
   ```
   $ dfu-util -l
+  dfu-util 0.9
+  ...
+  Found DFU: [0483:df11] ver=2200, devnum=29, cfg=1, intf=0, path="20-1", alt=3, name="@Device Feature/0xFFFF0000/01*004 e", serial="378B34663038"
+  Found DFU: [0483:df11] ver=2200, devnum=29, cfg=1, intf=0, path="20-1", alt=2, name="@OTP Memory /0x1FFF7800/01*512 e,01*016 e", serial="378B34663038"
+  Found DFU: [0483:df11] ver=2200, devnum=29, cfg=1, intf=0, path="20-1", alt=1, name="@Option Bytes  /0x1FFFC000/01*016 e", serial="378B34663038"
+  Found DFU: [0483:df11] ver=2200, devnum=29, cfg=1, intf=0, path="20-1", alt=0, name="@Internal Flash  /0x08000000/04*016Kg,01*064Kg,03*128Kg", serial="378B34663038"
   ```
 
 - Install binary:
   ```
   $ dfu-util -a 0 -s 0x08000000:leave -D blinky.bin
+  ...
+  Opening DFU capable USB device...
+  ID 0483:df11
+  Run-time device DFU version 011a
+  ...
+  Device returned transfer size 2048
+  DfuSe interface name: "Internal Flash  "
+  Downloading to address = 0x08000000, size = 644
+  Download	[=========================] 100%          644 bytes
+  Download done.
+  File downloaded successfully
+  Transitioning to dfuMANIFEST state
   ```
 
-The Green LED should start blinking.
+The Blue LED should start blinking.
