@@ -1,5 +1,5 @@
 [package]
-name = "stm32f411-hal-ssd1306"
+name = "stm32f411-hal-blinky"
 version = "0.1.0"
 edition = "2018"
 
@@ -15,3 +15,6 @@ cortex-m = "0.6.2"
 panic-halt = "0.2.0"
 stm32f4xx-hal = {version = "0.7.0", features = ["stm32f411", "rt"]}
 
+[features]
+default = []
+core_delay = []
