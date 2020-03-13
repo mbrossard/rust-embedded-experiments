@@ -75,4 +75,20 @@ This step requires the program [dfu-util](http://dfu-util.sourceforge.net/) to b
   Transitioning to dfuMANIFEST state
   ```
 
+### Using pyocd
+
+Tested with STLink-V2 probe but should work with all probes supported by pyocd.
+
+- Install CMSIS pack for STM32F411CE (only needs to be done once):
+  ```
+  $ pyocd pack -i stm32f411ce
+  ```
+
+- Flash binary:
+  ```
+  $ pyocd flash --target stm32f411ce blinky.bin
+  ```
+
+### After installation
+
 The Blue LED should start blinking.

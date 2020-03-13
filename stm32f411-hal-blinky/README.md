@@ -38,6 +38,8 @@ like [WeAct V1.3 STM32F411CEU6](https://github.com/mcauser/WEACT_F411CEU6).
 
 ## Installation instructions
 
+### Using DFU
+
 This step requires the program [dfu-util](http://dfu-util.sourceforge.net/) to be installed.
 
 - Put the device in DFU mode:
@@ -75,5 +77,21 @@ This step requires the program [dfu-util](http://dfu-util.sourceforge.net/) to b
   File downloaded successfully
   Transitioning to dfuMANIFEST state
   ```
+
+### Using pyocd
+
+Tested with STLink-V2 probe but should work with all probes supported by pyocd.
+
+- Install CMSIS pack for STM32F411CE (only needs to be done once):
+  ```
+  $ pyocd pack -i stm32f411ce
+  ```
+
+- Flash binary:
+  ```
+  $ pyocd flash --target stm32f411ce hal-blinky.bin
+  ```
+
+### After installation
 
 The Blue LED should start blinking.
