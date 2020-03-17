@@ -30,6 +30,18 @@ like [WeAct V1.3 STM32F411CEU6](https://github.com/mcauser/WEACT_F411CEU6).
 
 ## Installation instructions
 
+### Using `cargo-flash`
+
+- Install [cargo-flash](https://github.com/probe-rs/cargo-flash)
+  ```
+  $ cargo install cargo-flash
+  ```
+
+- Flash image
+  ```
+  $ cargo flash --release --bin stm32f411-hal-ssd1306 --chip STM32F411CE
+  ```
+
 This step requires the program [dfu-util](http://dfu-util.sourceforge.net/) to be installed.
 
 - Put the device in DFU mode:
