@@ -1,0 +1,21 @@
+[package]
+authors = ["Mathias Brossard <mathias@brossard.org>"]
+name = "invaders"
+version = "0.1.0"
+edition = "2018"
+
+[profile.release]
+opt-level = 'z'
+lto = true
+debug = true
+incremental = false
+codegen-units = 1 # better optimizations
+
+[dependencies]
+cortex-m = "0.5.2"
+cortex-m-rt = "0.6.4"
+stm32f746g-disc = { git="https://github.com/mbrossard/stm32f746g-disc.git" }
+
+[dependencies.stm32f7]
+version = "0.3.2"
+features = ["stm32f7x6", "rt"]
