@@ -1,4 +1,6 @@
-# invaders
+# invaders (stable)
+
+This version uses a fork of [stm32f7-discovery](https://github.com/embed-rs/stm32f7-discovery.git) to use a stable version of the Rust toolchain.
 
 ## Build instructions
 

@@ -1,4 +1,6 @@
-# stm32f746g-disc-invaders
+# invaders (nightly)
+
+This version uses the [stm32f7-discovery](https://github.com/embed-rs/stm32f7-discovery.git) crate that requires a non-stable version of the Rust toolchain.
 
 ## Build instructions
 

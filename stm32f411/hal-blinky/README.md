@@ -10,13 +10,13 @@ The Blue LED on the board should start blinking once project is installed.
 
 Adding `--features core_delay` to the `cargo` instructions disable the use of a much more precise delay function based on the system clock. The benefit is a project size very close to the version of this project not using `embedded-hal`.
 
-- With `core_delay`:
+- With the `core_delay` feature the firmware has a size of 664 bytes:
   ```
   % cargo size --bin hal-blinky --release --features core_delay
     text	   data	    bss	    dec	    hex	filename
     664	      0	      4	    668	    29c	hal-blinky
   ```
-- Without:
+- Without the firmware has a size of 2016 bytes:
   ```
   % cargo size --bin hal-blinky --release
     text	   data	    bss	    dec	    hex	filename
