@@ -1,0 +1,20 @@
+[package]
+name = "ssd1306-spi"
+version = "0.1.0"
+edition = "2018"
+
+[profile.release]
+opt-level = 'z'
+lto = true
+debug = true
+
+[dependencies]
+nrf52840-hal = "0.8.1"
+cortex-m-rt = "0.6.12"
+embedded-hal = "0.2.3"
+cortex-m = { version = "0.6.2", features = [ "const-fn" ] }
+panic-halt = "0.2.0"
+
+embedded-graphics = "0.4.9"
+ssd1306 = "0.2.6"
+rand = {version = "0.7.0", default-features = false, features = ["small_rng"]}
