@@ -1,5 +1,5 @@
 [package]
-name = "hal-ssd1306"
+name = "ssd1306-i2c"
 version = "0.1.0"
 edition = "2018"
 

@@ -6,7 +6,7 @@ board with [STM32F411CE](https://www.st.com/en/microcontrollers-microprocessors/
 The following projects:
 - blinky
 - hal-blinky
-- hal-ssd1306
+- ssd1306-i2c
 
 In the rest of the document replace `<project>` with the project name:
 
