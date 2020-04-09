@@ -18,26 +18,11 @@ use st7789::{ST7789, Orientation};
 use rand::{Rng, SeedableRng};
 use rand::rngs::SmallRng;
 
-// https://github.com/nrf-rs/nrf52-hal/blob/master/examples/twi-ssd1306/src/main.rs
-
 #[cortex_m_rt::entry]
 fn main() -> ! {
     let cp = cortex_m::Peripherals::take().unwrap();
     let p = Peripherals::take().unwrap();
-    // let pins0 = p.P0.split();
     let pins1 = p.P1.split();
-
-    // let _btn1 = pins0.p0_11.into_pullup_input();
-    // let _btn2 = pins0.p0_12.into_pullup_input();
-    // let _btn3 = pins0.p0_24.into_pullup_input();
-    // let _btn4 = pins0.p0_25.into_pullup_input();
-
-//     disp.draw(
-//        Font6x8::render_str("Hello Rust!")
-//            .with_stroke(Some(1u8.into()))
-//            .translate(Coord::new(10, 24))
-//            .into_iter(),
-//    );
 
     let spiclk = pins1.p1_14.into_push_pull_output(Level::Low).degrade();
     let spimosi = pins1.p1_13.into_push_pull_output(Level::Low).degrade();
