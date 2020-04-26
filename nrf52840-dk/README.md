@@ -53,3 +53,25 @@ In the rest of the document replace `<project>` with the project name:
   ```
   $ pyocd flash -b nRF52840_xxAA --format elf target/thumbv7em-none-eabihf/release/<project>
   ```
+
+### Using DAPLink
+
+The DAPLink firmware is the best option for use with pyocd and cargo-flash. 
+
+
+- The first step is [Updating the DAPLink bootloader](https://os.mbed.com/blog/entry/DAPLink-bootloader-update/) which
+  requires connecting the device with the reset button pushed and downloading the new
+  [bootloader binary](https://os.mbed.com/media/uploads/c1728p9/0244_sam3u2c_bootloader_update_0x5000.bin). On Mac OS X:
+  ```
+  $ sudo mount -u -w -o sync /Volumes/BOOTLOADER
+  $ cp -X  ~/Downloads/0244_sam3u2c_bootloader_update_0x5000.bin /Volumes/BOOTLOADER
+  ```
+
+- The second step is [Installing DAPLink firmware](https://armmbed.github.io/DAPLink/?board=Nordic-nRF52840-DK). I am using
+  [this version](https://armmbed.github.io/DAPLink//firmware/0253_sam3u2c_mkit_dk_dongle_nrf5x_0x5000.bin) with success using
+  the commands (on Mac OS X):
+  ```
+  $ sudo mount -u -w -o sync /Volumes/MAINTENANCE
+  $ cp -X  ~/Downloads/0253_sam3u2c_mkit_dk_dongle_nrf5x_0x5000.bin /Volumes/MAINTENANCE
+  ```
+
