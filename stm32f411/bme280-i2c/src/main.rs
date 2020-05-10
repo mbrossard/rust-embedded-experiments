@@ -5,8 +5,8 @@ extern crate cortex_m;
 extern crate cortex_m_rt;
 extern crate panic_semihosting;
 
+use cortex_m_semihosting::{dbg, hio};
 use core::fmt::Write;
-use cortex_m_semihosting::{hprintln, dbg, hio};
 use stm32f4xx_hal::{i2c::I2c, delay::Delay, prelude::*, stm32};
 use bme280::BME280;
 
