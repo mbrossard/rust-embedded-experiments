@@ -5,6 +5,7 @@
 
 use panic_semihosting as _;
 
+use cortex_m_semihosting::{hprintln};
 use cortex_m_rt::entry;
 use stm32f4xx_hal::otg_fs::{UsbBus, USB};
 use stm32f4xx_hal::{prelude::*, stm32};
@@ -56,9 +57,11 @@ fn main() -> ! {
             Ok(count) if count > 0 => {
                 // Echo back in upper case
                 for c in buf[0..count].iter_mut() {
+                    hprintln!("[in]: {:02x}", *c).ok();
                     if 0x61 <= *c && *c <= 0x7a {
                         *c &= !0x20;
                     }
+                    hprintln!("[out]: {:02x}", *c).ok();
                 }
 
                 let mut write_offset = 0;
