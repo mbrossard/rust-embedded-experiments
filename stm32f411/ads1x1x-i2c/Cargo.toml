@@ -19,3 +19,8 @@ stm32f4xx-hal = {version = "0.7.0", features = ["stm32f411", "rt"]}
 embedded-hal = "0.2.3"
 ads1x1x = "0.2.0"
 nb = "0.1.2"
+
+[features]
+default = ["ads1115"]
+ads1115 = []
+ads1015 = []

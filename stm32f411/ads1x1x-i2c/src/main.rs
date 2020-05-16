@@ -15,8 +15,6 @@ use ads1x1x::{channel::*, Ads1x1x, SlaveAddr};
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
-    // cortex_m::asm::delay(1000000000);
-
     if let (Some(dp), Some(cp)) = (
         stm32::Peripherals::take(),
         cortex_m::peripheral::Peripherals::take(),
@@ -44,6 +42,9 @@ fn main() -> ! {
         writeln!(stdout, "Hello world!").ok();
 
         // initialize the ADC
+        #[cfg(feature = "ads1115")]
+        let mut adc = Ads1x1x::new_ads1115(i2c, SlaveAddr::default());
+        #[cfg(feature = "ads1015")]
         let mut adc = Ads1x1x::new_ads1015(i2c, SlaveAddr::default());
 
         writeln!(stdout, "Hello world!").ok();
