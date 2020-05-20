@@ -32,7 +32,7 @@ fn main() -> ! {
     let _cs = pins1.p1_06.into_push_pull_output(Level::Low).degrade();
 
     let spi_pins = nrf52840_hal::spim::Pins { sck: spiclk, miso: Some(spimiso), mosi: Some(spimosi) };
-    let spi = Spim::new(p.SPIM0, spi_pins, Frequency::M8, MODE_3, 122);
+    let spi = Spim::new(p.SPIM0, spi_pins, Frequency::M8, MODE_3, 0);
 
     let delay = Delay::new(cp.SYST);
     let mut display = ST7789::new(spi, dc, rst, 240, 240, delay);
