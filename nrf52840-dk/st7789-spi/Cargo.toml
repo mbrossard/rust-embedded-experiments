@@ -9,13 +9,14 @@ lto = true
 debug = true
 
 [dependencies]
-nrf52840-hal = "0.8.1"
+nrf52840-hal = "0.10.0"
 cortex-m = { version = "0.6.2", features = [ "const-fn" ] }
 cortex-m-rt = "0.6.12"
 cortex-m-semihosting = "0.3.5"
 embedded-hal = "0.2.3"
 panic-halt = "0.2.0"
 panic-semihosting = "0.5.3"
-embedded-graphics = "0.6.1"
-st7789 = "0.2.2"
+embedded-graphics = "0.6.2"
+st7789 = "0.4.3"
+display-interface-spi = "0.3.1"
 rand = {version = "0.7.0", default-features = false, features = ["small_rng"]}

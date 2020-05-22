@@ -1,44 +1,41 @@
 #![no_std]
 #![no_main]
 
-extern crate cortex_m;
-extern crate cortex_m_rt;
 extern crate panic_halt;
-extern crate nrf52840_hal;
 
 use nrf52840_hal::{
-    prelude::*,
     spim::*,
     delay::Delay,
     gpio::Level,
-    nrf52840_pac::Peripherals,
+    pac::Peripherals,
 };
 use embedded_graphics::{image::*, prelude::*, pixelcolor::Rgb565};
 use st7789::{ST7789, Orientation};
 use rand::{Rng, SeedableRng};
 use rand::rngs::SmallRng;
+use embedded_hal::blocking::delay::DelayMs;
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
     let cp = cortex_m::Peripherals::take().unwrap();
     let p = Peripherals::take().unwrap();
-    let pins1 = p.P1.split();
+    let pins1 = nrf52840_hal::gpio::p1::Parts::new(p.P1);
 
     let spiclk = pins1.p1_14.into_push_pull_output(Level::Low).degrade();
     let spimosi = pins1.p1_13.into_push_pull_output(Level::Low).degrade();
-    let spimiso = pins1.p1_12.into_floating_input().degrade();
     let rst = pins1.p1_08.into_push_pull_output(Level::Low).degrade();
     let dc = pins1.p1_07.into_push_pull_output(Level::Low).degrade();
     let _cs = pins1.p1_06.into_push_pull_output(Level::Low).degrade();
 
-    let spi_pins = nrf52840_hal::spim::Pins { sck: spiclk, miso: Some(spimiso), mosi: Some(spimosi) };
+    let spi_pins = nrf52840_hal::spim::Pins { sck: spiclk, miso: None, mosi: Some(spimosi) };
     let spi = Spim::new(p.SPIM0, spi_pins, Frequency::M8, MODE_3, 0);
 
-    let delay = Delay::new(cp.SYST);
-    let mut display = ST7789::new(spi, dc, rst, 240, 240, delay);
+    let mut delay = Delay::new(cp.SYST);
+    let di = display_interface_spi::SPIInterfaceNoCS::new(spi, dc);
+    let mut display = ST7789::new(di, rst, 240, 240);
 
-    display.init().unwrap();
-    display.set_orientation(&Orientation::Portrait).unwrap();
+    display.init(&mut delay).unwrap();
+    display.set_orientation(Orientation::Portrait).unwrap();
     display.clear(Rgb565::BLACK).unwrap();
 
     let mut rng = SmallRng::seed_from_u64(0);
@@ -112,7 +109,7 @@ fn main() -> ! {
                 y += i_size * p_size + interval;
             }
         }
-        cortex_m::asm::delay(50000000);
+        delay.delay_ms(500_u32);
         img = !img;
     }
 }
