@@ -10,6 +10,7 @@ This project uses an SPI OLED 0.96" screen using a SSD1306 driver chip. The one 
 | P1.13  | D1/SDA |
 | P1.08  |  RES   |
 | P1.07  |   DC   |
+| P1.06  |   CS   |
 
 See parent directory for build and installation instructions.
 
