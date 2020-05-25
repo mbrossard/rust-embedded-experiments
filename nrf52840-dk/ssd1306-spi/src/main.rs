@@ -13,8 +13,7 @@ use nrf52840_hal::{
 
 use embedded_graphics::{image::ImageRaw, image::Image, pixelcolor::BinaryColor, prelude::*};
 use ssd1306::{prelude::*, Builder};
-use rand::{Rng, SeedableRng};
-use rand::rngs::SmallRng;
+use rand::{Rng, SeedableRng, rngs::SmallRng};
 use embedded_hal::blocking::delay::DelayMs;
 
 #[cortex_m_rt::entry]

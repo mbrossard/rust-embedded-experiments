@@ -11,8 +11,7 @@ use nrf52840_hal::{
 };
 use embedded_graphics::{image::*, prelude::*, pixelcolor::Rgb565};
 use st7789::{ST7789, Orientation};
-use rand::{Rng, SeedableRng};
-use rand::rngs::SmallRng;
+use rand::{Rng, SeedableRng, rngs::SmallRng};
 use embedded_hal::blocking::delay::DelayMs;
 
 #[cortex_m_rt::entry]
