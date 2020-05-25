@@ -23,9 +23,9 @@ fn main() -> ! {
     let p = Peripherals::take().unwrap();
     let pins1 = nrf52840_hal::gpio::p1::Parts::new(p.P1);
 
-    let spiclk = pins1.p1_14.into_push_pull_output(Level::Low).degrade();
+    let spiclk = pins1.p1_15.into_push_pull_output(Level::Low).degrade();
+    let spimiso = pins1.p1_14.into_floating_input().degrade();
     let spimosi = pins1.p1_13.into_push_pull_output(Level::Low).degrade();
-    let spimiso = pins1.p1_12.into_floating_input().degrade();
     let mut rst = pins1.p1_08.into_push_pull_output(Level::Low).degrade();
     let dc = pins1.p1_07.into_push_pull_output(Level::Low).degrade();
     let _cs = pins1.p1_06.into_push_pull_output(Level::Low).degrade();
