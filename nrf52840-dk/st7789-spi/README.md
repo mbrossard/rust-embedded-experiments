@@ -1,14 +1,14 @@
 # st7789-spi
 
-|  Board | Screen |
-|:------:|:------:|
-|  GND   |  GND   |
-|  VDD   |  VDD   |
-| P1.14  |  SCL   |
-| P1.13  |  SDA   |
-| P1.08  |  RES   |
-| P1.07  |  DC    |
-| P1.06  |  CS    |
+|    Board    | Screen |
+|:-----------:|:------:|
+|     GND     |  GND   |
+|     VDD     |  VDD   |
+| P1.15 (D13) |  SCL   |
+| P1.13 (D11) |  SDA   |
+| P1.08 (D7)  |  RES   |
+| P1.07 (D6)  |  DC    |
+| P1.06 (D5)  |  CS    |
 
 See parent directory for build and installation instructions.
 
