@@ -1,22 +1,15 @@
 #![no_std]
 #![no_main]
 
-extern crate cortex_m;
-extern crate cortex_m_rt;
 extern crate panic_halt;
-extern crate nrf52840_hal;
 
-use nrf52840_hal::{
-    prelude::*,
-    gpio::Level,
-    nrf52840_pac::Peripherals,
-};
+use nrf52840_hal::{prelude::*, gpio::*, pac::Peripherals};
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
     let p = Peripherals::take().unwrap();
-    let pins0 = p.P0.split();
-    let pins1 = p.P1.split();
+    let pins0 = p0::Parts::new(p.P0);
+    let pins1 = p1::Parts::new(p.P1);
 
     // LD1  Green   P0.06
     // LD2  Red     P0.08
@@ -31,22 +24,22 @@ fn main() -> ! {
     // let mut timer = p.TIMER0.constrain();
 
     loop {
-        led_1g.set_low();
+        led_1g.set_low().unwrap();
         cortex_m::asm::delay(20000000);
-        led_2r.set_low();
+        led_2r.set_low().unwrap();
         cortex_m::asm::delay(20000000);
-        led_2g.set_low();
+        led_2g.set_low().unwrap();
         cortex_m::asm::delay(20000000);
-        led_2b.set_low();
+        led_2b.set_low().unwrap();
         cortex_m::asm::delay(30000000);
 
-        led_2b.set_high();
+        led_2b.set_high().unwrap();
         cortex_m::asm::delay(20000000);
-        led_2g.set_high();
+        led_2g.set_high().unwrap();
         cortex_m::asm::delay(20000000);
-        led_2r.set_high();
+        led_2r.set_high().unwrap();
         cortex_m::asm::delay(20000000);
-        led_1g.set_high();
+        led_1g.set_high().unwrap();
         cortex_m::asm::delay(30000000);
     }
 }
