@@ -9,11 +9,11 @@ lto = true
 debug = true
 
 [dependencies]
-stm32f4 = {version = "0.10.0", features = ["stm32f411", "rt"]}
+stm32f4 = {version = "0.11.0", features = ["stm32f411", "rt"]}
 cortex-m-rt = "0.6.12"
 cortex-m = "0.6.2"
 panic-halt = "0.2.0"
-stm32f4xx-hal = {version = "0.7.0", features = ["stm32f411", "rt"]}
-embedded-graphics = "0.4.9"
-ssd1306 = "0.2.6"
+stm32f4xx-hal = {version = "0.8.1", features = ["stm32f411", "rt"]}
+embedded-graphics = "0.6.2"
+ssd1306 = "0.3.1"
 rand = {version = "0.7.0", default-features = false, features = ["small_rng"]}

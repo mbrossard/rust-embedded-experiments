@@ -1,16 +1,12 @@
 #![no_std]
 #![no_main]
 
-extern crate cortex_m;
-extern crate cortex_m_rt;
 extern crate panic_halt;
-// extern crate stm32f4xx_hal;
 
-use embedded_graphics::{image::Image1BPP, prelude::*};
+use embedded_graphics::{image::ImageRaw, image::Image, pixelcolor::BinaryColor, prelude::*};
 use ssd1306::{prelude::*, Builder as SSD1306Builder};
 use stm32f4xx_hal::{i2c::I2c, prelude::*, stm32};
-use rand::{Rng, SeedableRng};
-use rand::rngs::SmallRng;
+use rand::{Rng, SeedableRng, rngs::SmallRng};
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
@@ -37,12 +33,13 @@ fn main() -> ! {
         disp.flush().unwrap();
 
         // Display the rustacean
-        let im = Image1BPP::new(include_bytes!("./rust-image.data"), 128, 64);
+        let raw: ImageRaw<BinaryColor> = ImageRaw::new(include_bytes!("./rust-image.data"), 128, 64);
+        let im = Image::new(&raw, Point::new(0, 0));
 
         let mut img = true;
         loop {
             if img {
-                disp.draw(im.into_iter());
+                disp.draw_image(&im).ok();
                 disp.flush().unwrap();
             } else {
                 let width = 128;
