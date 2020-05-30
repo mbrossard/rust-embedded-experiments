@@ -8,7 +8,7 @@ extern crate cortex_m_semihosting;
 #[macro_use(block)]
 extern crate nb;
 
-use cortex_m_semihosting::{hprintln, dbg, hio};
+use cortex_m_semihosting::{hprintln, hio};
 use core::fmt::Write;
 use stm32f4xx_hal::{i2c::I2c, delay::Delay, prelude::*, stm32};
 use ads1x1x::{channel::*, Ads1x1x, SlaveAddr};
