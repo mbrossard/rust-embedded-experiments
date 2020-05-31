@@ -40,7 +40,7 @@ fn main() -> ! {
         let mut sensor = apds9960::Apds9960::new(i2c);
         sensor.enable().unwrap();
         sensor.enable_proximity().unwrap();
-        sensor.enable_gesture();
+        sensor.enable_gesture().unwrap();
 
         let mut on = true;
         loop {
