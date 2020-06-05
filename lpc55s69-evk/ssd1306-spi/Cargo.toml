@@ -9,8 +9,7 @@ lto = true
 debug = true
 
 [dependencies]
-# lpc55s6x-hal = "0.0.2"
-lpc55-hal = { git = "https://github.com/nickray/lpc55-hal.git", branch = "main" }
+lpc55-hal = "0.0.3"
 cortex-m-rt = "0.6.12"
 cortex-m = "0.6.2"
 panic-halt = "0.2.0"
