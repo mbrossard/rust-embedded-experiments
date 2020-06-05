@@ -4,19 +4,18 @@
 extern crate cortex_m;
 extern crate cortex_m_rt;
 extern crate panic_halt;
-extern crate lpc55s6x_hal;
 
-use lpc55s6x_hal::{drivers::pins::Level, prelude::*};
+use lpc55_hal::{drivers::pins::Level, prelude::*};
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
-    let hal = lpc55s6x_hal::new();
+    let hal = lpc55_hal::new();
 
     let mut syscon = hal.syscon;
     let mut gpio = hal.gpio.enabled(&mut syscon);
     let mut iocon = hal.iocon.enabled(&mut syscon);
 
-    let pins = lpc55s6x_hal::Pins::take().unwrap();
+    let pins = lpc55_hal::Pins::take().unwrap();
 
     // Note: for the LEDs, high is off and low is on.
 
