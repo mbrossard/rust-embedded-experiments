@@ -59,7 +59,7 @@ fn main() -> ! {
     let spi_pins = (sck, mosi, NoMiso, NoCs);
     let spi = SpiMaster::new(spi, spi_pins, 8.mhz(), embedded_hal::spi::MODE_3);
 
-    let mut rst = pins
+    let rst = pins
         .pio1_9
         .into_gpio_pin(&mut iocon, &mut gpio)
         .into_output(Level::High);
