@@ -3,19 +3,19 @@
 
 extern crate cortex_m;
 extern crate cortex_m_rt;
-extern crate panic_halt;
-extern crate lpc55_hal;
 extern crate embedded_hal;
+extern crate lpc55_hal;
+extern crate panic_halt;
 
 use lpc55_hal::{
-    prelude::*,
     drivers::{pins::Level, SpiMaster},
-    typestates::pin::flexcomm::{NoMiso, NoCs},
+    prelude::*,
+    typestates::pin::flexcomm::{NoCs, NoMiso},
 };
 
-use embedded_graphics::{image::ImageRaw, image::Image, pixelcolor::BinaryColor, prelude::*};
-use rand::{Rng, SeedableRng, rngs::SmallRng};
+use embedded_graphics::{image::Image, image::ImageRaw, pixelcolor::BinaryColor, prelude::*};
 use embedded_hal::blocking::delay::DelayMs;
+use rand::{rngs::SmallRng, Rng, SeedableRng};
 use ssd1306::{self, prelude::*};
 
 struct LpcDelay {}
@@ -70,14 +70,24 @@ fn main() -> ! {
     let mosi = pins.pio0_26.into_spi8_mosi_pin(&mut iocon);
     let spi_pins = (sck, mosi, NoMiso, NoCs);
     let spi = SpiMaster::new(spi, spi_pins, 8.mhz(), embedded_hal::spi::MODE_3);
-    let mut rst = pins.pio1_9.into_gpio_pin(&mut iocon, &mut gpio).into_output(Level::High);
-    let dc = pins.pio1_10.into_gpio_pin(&mut iocon, &mut gpio).into_output_high();
-    let mut _cs = pins.pio1_4.into_gpio_pin(&mut iocon, &mut gpio).into_output_low();
+    let mut rst = pins
+        .pio1_9
+        .into_gpio_pin(&mut iocon, &mut gpio)
+        .into_output(Level::High);
+    let dc = pins
+        .pio1_10
+        .into_gpio_pin(&mut iocon, &mut gpio)
+        .into_output_high();
+    let mut _cs = pins
+        .pio1_4
+        .into_gpio_pin(&mut iocon, &mut gpio)
+        .into_output_low();
 
     let mut delay = LpcDelay {};
     let mut display: GraphicsMode<_> = ssd1306::Builder::new()
         .size(DisplaySize::Display128x64)
-        .connect_spi(spi, dc).into();
+        .connect_spi(spi, dc)
+        .into();
     display.reset(&mut rst, &mut delay).unwrap();
     display.init().unwrap();
 

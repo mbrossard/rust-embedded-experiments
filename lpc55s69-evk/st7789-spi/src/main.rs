@@ -4,15 +4,15 @@
 extern crate panic_halt;
 
 use lpc55_hal::{
-    prelude::*,
     drivers::{pins::Level, SpiMaster},
-    typestates::pin::flexcomm::{NoMiso, NoCs},
+    prelude::*,
+    typestates::pin::flexcomm::{NoCs, NoMiso},
 };
 
-use embedded_graphics::{image::*, prelude::*, pixelcolor::Rgb565};
-use st7789::{ST7789, Orientation};
-use rand::{Rng, SeedableRng, rngs::SmallRng};
+use embedded_graphics::{image::*, pixelcolor::Rgb565, prelude::*};
 use embedded_hal::blocking::delay::{DelayMs, DelayUs};
+use rand::{rngs::SmallRng, Rng, SeedableRng};
+use st7789::{Orientation, ST7789};
 
 struct LpcDelay {}
 
@@ -59,9 +59,18 @@ fn main() -> ! {
     let spi_pins = (sck, mosi, NoMiso, NoCs);
     let spi = SpiMaster::new(spi, spi_pins, 8.mhz(), embedded_hal::spi::MODE_3);
 
-    let mut rst = pins.pio1_9.into_gpio_pin(&mut iocon, &mut gpio).into_output(Level::High);
-    let dc = pins.pio1_10.into_gpio_pin(&mut iocon, &mut gpio).into_output_high();
-    let mut _cs = pins.pio1_4.into_gpio_pin(&mut iocon, &mut gpio).into_output_low();
+    let mut rst = pins
+        .pio1_9
+        .into_gpio_pin(&mut iocon, &mut gpio)
+        .into_output(Level::High);
+    let dc = pins
+        .pio1_10
+        .into_gpio_pin(&mut iocon, &mut gpio)
+        .into_output_high();
+    let mut _cs = pins
+        .pio1_4
+        .into_gpio_pin(&mut iocon, &mut gpio)
+        .into_output_low();
 
     let mut delay = LpcDelay {};
     let di = display_interface_spi::SPIInterfaceNoCS::new(spi, dc);
