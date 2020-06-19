@@ -6,8 +6,8 @@ extern crate cortex_m_rt;
 extern crate panic_halt;
 extern crate stm32f4xx_hal;
 
-use stm32f4xx_hal as hal;
 use hal::prelude::*;
+use stm32f4xx_hal as hal;
 
 #[cortex_m_rt::entry]
 fn main() -> ! {

@@ -5,10 +5,10 @@ extern crate cortex_m;
 extern crate cortex_m_rt;
 extern crate panic_halt;
 
-use stm32f4xx_hal::{spi::*, delay::Delay, prelude::*, stm32, time::Hertz};
-use embedded_graphics::{image::ImageRaw, image::Image, pixelcolor::BinaryColor, prelude::*};
+use embedded_graphics::{image::Image, image::ImageRaw, pixelcolor::BinaryColor, prelude::*};
+use rand::{rngs::SmallRng, Rng, SeedableRng};
 use ssd1306::{prelude::*, Builder};
-use rand::{Rng, SeedableRng, rngs::SmallRng};
+use stm32f4xx_hal::{delay::Delay, prelude::*, spi::*, stm32, time::Hertz};
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
@@ -28,7 +28,10 @@ fn main() -> ! {
     let mut led = gpioc.pc13.into_push_pull_output();
 
     // let mode0 = Mode { polarity: Polarity::IdleLow, phase: Phase::CaptureOnFirstTransition };
-    let mode3 = Mode { polarity: Polarity::IdleHigh, phase: Phase::CaptureOnSecondTransition };
+    let mode3 = Mode {
+        polarity: Polarity::IdleHigh,
+        phase: Phase::CaptureOnSecondTransition,
+    };
     // let freq500k: Hertz = stm32f4xx_hal::time::KiloHertz(500).into();
     let freq8m: Hertz = stm32f4xx_hal::time::MegaHertz(8).into();
 
@@ -52,7 +55,7 @@ fn main() -> ! {
         let sck = gpiob.pb13.into_alternate_af5();
         let miso = gpiob.pb14.into_alternate_af5();
         let mosi = gpiob.pb15.into_alternate_af5();
-        let spi = Spi::spi2(dp.SPI2, (sck, miso, mosi), mode3, freq8m,  clocks);
+        let spi = Spi::spi2(dp.SPI2, (sck, miso, mosi), mode3, freq8m, clocks);
         let dc = gpioa.pa9.into_push_pull_output();
         let mut cs = gpioa.pa10.into_push_pull_output();
         cs.set_low().unwrap();

@@ -16,6 +16,6 @@ cortex-m-semihosting = "0.3.5"
 panic-halt = "0.2.0"
 panic-semihosting = "0.5.3"
 stm32f4xx-hal = {version = "0.8.3", features = ["stm32f411", "usb_fs", "rt"]}
-embedded-hal = "0.2.3"
+embedded-hal = "0.2.4"
 usb-device = "0.2.5"
 usbd-serial = "0.1.0"

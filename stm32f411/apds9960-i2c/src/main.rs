@@ -3,13 +3,13 @@
 
 extern crate cortex_m;
 extern crate cortex_m_rt;
-extern crate panic_semihosting;
 extern crate cortex_m_semihosting;
+extern crate panic_semihosting;
 #[macro_use(block)]
 extern crate nb;
 
-use cortex_m_semihosting::{hprintln};
-use stm32f4xx_hal::{i2c::I2c, delay::Delay, prelude::*, stm32};
+use cortex_m_semihosting::hprintln;
+use stm32f4xx_hal::{delay::Delay, i2c::I2c, prelude::*, stm32};
 
 #[cortex_m_rt::entry]
 fn main() -> ! {

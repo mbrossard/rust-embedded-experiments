@@ -3,10 +3,10 @@
 
 extern crate panic_halt;
 
-use embedded_graphics::{image::ImageRaw, image::Image, pixelcolor::BinaryColor, prelude::*};
+use embedded_graphics::{image::Image, image::ImageRaw, pixelcolor::BinaryColor, prelude::*};
+use rand::{rngs::SmallRng, Rng, SeedableRng};
 use ssd1306::{prelude::*, Builder as SSD1306Builder};
 use stm32f4xx_hal::{i2c::I2c, prelude::*, stm32};
-use rand::{Rng, SeedableRng, rngs::SmallRng};
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
@@ -33,7 +33,8 @@ fn main() -> ! {
         disp.flush().unwrap();
 
         // Display the rustacean
-        let raw: ImageRaw<BinaryColor> = ImageRaw::new(include_bytes!("./rust-image.data"), 128, 64);
+        let raw: ImageRaw<BinaryColor> =
+            ImageRaw::new(include_bytes!("./rust-image.data"), 128, 64);
         let im = Image::new(&raw, Point::new(0, 0));
 
         let mut img = true;

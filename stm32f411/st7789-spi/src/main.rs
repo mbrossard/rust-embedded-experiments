@@ -4,10 +4,10 @@
 extern crate panic_halt;
 // extern crate panic_semihosting;
 
-use stm32f4xx_hal::{spi::*, delay::Delay, prelude::*, time::*, stm32};
-use embedded_graphics::{image::*, prelude::*, pixelcolor::Rgb565};
-use st7789::{ST7789, Orientation};
-use rand::{Rng, SeedableRng, rngs::SmallRng};
+use embedded_graphics::{image::*, pixelcolor::Rgb565, prelude::*};
+use rand::{rngs::SmallRng, Rng, SeedableRng};
+use st7789::{Orientation, ST7789};
+use stm32f4xx_hal::{delay::Delay, prelude::*, spi::*, stm32, time::*};
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
@@ -26,7 +26,10 @@ fn main() -> ! {
     let mut led = gpioc.pc13.into_push_pull_output();
 
     // let mode0 = Mode { polarity: Polarity::IdleLow, phase: Phase::CaptureOnFirstTransition };
-    let mode3 = Mode { polarity: Polarity::IdleLow, phase: Phase::CaptureOnFirstTransition };
+    let mode3 = Mode {
+        polarity: Polarity::IdleLow,
+        phase: Phase::CaptureOnFirstTransition,
+    };
     // let freq500k: Hertz = KiloHertz(500).into();
     let freq8m: Hertz = MegaHertz(8).into();
 
@@ -35,8 +38,7 @@ fn main() -> ! {
         let sck = gpioa.pa5.into_alternate_af5();
         let miso = gpioa.pa6.into_alternate_af5();
         let mosi = gpioa.pa7.into_alternate_af5();
-        let spi = Spi::spi1(dp.SPI1, (sck, miso, mosi),
-                            mode3, freq8m, clocks);
+        let spi = Spi::spi1(dp.SPI1, (sck, miso, mosi), mode3, freq8m, clocks);
         let rst = gpioa.pa4.into_push_pull_output();
         let dc = gpioa.pa3.into_push_pull_output();
         let cs = gpioa.pa2.into_push_pull_output();
@@ -49,8 +51,7 @@ fn main() -> ! {
         let sck = gpiob.pb13.into_alternate_af5();
         let miso = gpiob.pb14.into_alternate_af5();
         let mosi = gpiob.pb15.into_alternate_af5();
-        let spi = Spi::spi2(dp.SPI2, (sck, miso, mosi),
-                            mode3, freq8m, clocks);
+        let spi = Spi::spi2(dp.SPI2, (sck, miso, mosi), mode3, freq8m, clocks);
         let rst = gpioa.pa8.into_push_pull_output();
         let dc = gpioa.pa9.into_push_pull_output();
         let cs = gpioa.pa10.into_push_pull_output();

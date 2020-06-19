@@ -3,15 +3,15 @@
 
 extern crate cortex_m;
 extern crate cortex_m_rt;
-extern crate panic_semihosting;
 extern crate cortex_m_semihosting;
+extern crate panic_semihosting;
 #[macro_use(block)]
 extern crate nb;
 
-use cortex_m_semihosting::{hprintln, hio};
-use core::fmt::Write;
-use stm32f4xx_hal::{i2c::I2c, delay::Delay, prelude::*, stm32};
 use ads1x1x::{channel::*, Ads1x1x, SlaveAddr};
+use core::fmt::Write;
+use cortex_m_semihosting::{hio, hprintln};
+use stm32f4xx_hal::{delay::Delay, i2c::I2c, prelude::*, stm32};
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
@@ -56,11 +56,14 @@ fn main() -> ! {
                 led.set_low().unwrap();
             }
 
-            hprintln!("Measurements: [{}, {}, {}, {}]",
+            hprintln!(
+                "Measurements: [{}, {}, {}, {}]",
                 block!(adc.read(&mut SingleA0)).unwrap(),
                 block!(adc.read(&mut SingleA1)).unwrap(),
                 block!(adc.read(&mut SingleA2)).unwrap(),
-                block!(adc.read(&mut SingleA3)).unwrap()).ok();
+                block!(adc.read(&mut SingleA3)).unwrap()
+            )
+            .ok();
 
             delay.delay_ms(1000_u32);
 

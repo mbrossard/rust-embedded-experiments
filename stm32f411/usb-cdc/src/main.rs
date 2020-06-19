@@ -5,8 +5,8 @@
 
 use panic_semihosting as _;
 
-use cortex_m_semihosting::{hprintln};
 use cortex_m_rt::entry;
+use cortex_m_semihosting::hprintln;
 use stm32f4xx_hal::otg_fs::{UsbBus, USB};
 use stm32f4xx_hal::{prelude::*, stm32};
 use usb_device::prelude::*;
