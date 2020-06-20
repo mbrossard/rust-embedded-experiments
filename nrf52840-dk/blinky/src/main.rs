@@ -3,7 +3,7 @@
 
 extern crate panic_halt;
 
-use nrf52840_hal::{prelude::*, gpio::Level, pac::Peripherals};
+use nrf52840_hal::{gpio::Level, pac::Peripherals, prelude::*};
 
 #[cortex_m_rt::entry]
 fn main() -> ! {

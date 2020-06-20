@@ -3,16 +3,11 @@
 
 extern crate panic_halt;
 
-use nrf52840_hal::{
-    spim::*,
-    delay::Delay,
-    gpio::Level,
-    pac::Peripherals,
-};
-use embedded_graphics::{image::*, prelude::*, pixelcolor::Rgb565};
-use st7789::{ST7789, Orientation};
-use rand::{Rng, SeedableRng, rngs::SmallRng};
+use embedded_graphics::{image::*, pixelcolor::Rgb565, prelude::*};
 use embedded_hal::blocking::delay::DelayMs;
+use nrf52840_hal::{delay::Delay, gpio::Level, pac::Peripherals, spim::*};
+use rand::{rngs::SmallRng, Rng, SeedableRng};
+use st7789::{Orientation, ST7789};
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
@@ -26,7 +21,11 @@ fn main() -> ! {
     let dc = pins1.p1_07.into_push_pull_output(Level::Low).degrade();
     let _cs = pins1.p1_06.into_push_pull_output(Level::Low).degrade();
 
-    let spi_pins = nrf52840_hal::spim::Pins { sck: spiclk, miso: None, mosi: Some(spimosi) };
+    let spi_pins = nrf52840_hal::spim::Pins {
+        sck: spiclk,
+        miso: None,
+        mosi: Some(spimosi),
+    };
     let spi = Spim::new(p.SPIM0, spi_pins, Frequency::M8, MODE_3, 0);
 
     let mut delay = Delay::new(cp.SYST);

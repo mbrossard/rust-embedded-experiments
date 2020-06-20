@@ -9,8 +9,8 @@ lto = true
 debug = true
 
 [dependencies]
-nrf52840-hal = "0.10.0"
-cortex-m-rt = "0.6.12"
-embedded-hal = "0.2.1"
 cortex-m = { version = "0.6.2", features = [ "const-fn" ] }
+cortex-m-rt = "0.6.12"
+embedded-hal = "0.2.4"
+nrf52840-hal = "0.10.0"
 panic-halt = "0.2.0"
