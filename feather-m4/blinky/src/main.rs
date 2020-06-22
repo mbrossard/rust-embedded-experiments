@@ -1,14 +1,12 @@
 #![no_std]
 #![no_main]
 
-extern crate cortex_m;
-extern crate cortex_m_rt;
-extern crate panic_halt;
 extern crate feather_m4;
+extern crate panic_halt;
 
 use feather_m4::prelude::*;
 
-#[cortex_m_rt::entry]
+#[feather_m4::entry]
 fn main() -> ! {
     let peripherals = feather_m4::pac::Peripherals::take().unwrap();
     let mut pins = feather_m4::Pins::new(peripherals.PORT);
