@@ -6,13 +6,12 @@ use cortex_m::{asm, interrupt};
 use cortex_m_rt::{entry, exception, ExceptionFrame};
 use stm32f7::stm32f7x6::Peripherals;
 use stm32f746g_disc::{
-    println, print,
     gpio::{GpioPort, InputPin, OutputPin},
-    init,
-    lcd,
-    lcd::Lcd,
+    init, lcd,
     lcd::Color,
-    random::Rng
+    lcd::Lcd,
+    print, println,
+    random::Rng,
 };
 
 fn invaders(lcd: &mut Lcd, rng: &mut Rng) {
@@ -31,7 +30,8 @@ fn invaders(lcd: &mut Lcd, rng: &mut Rng) {
         while (x + i_size * p_size) < lcd::WIDTH as u32 {
             let mut cy = y;
             for _j in 0..i_size {
-                let mut bits: u32 = rng.poll_and_get()
+                let mut bits: u32 = rng
+                    .poll_and_get()
                     .expect("Failed to generate random number");
                 for i in 0..i_size / 2 {
                     let h = 1 << (i_size - i - 1);
@@ -48,9 +48,17 @@ fn invaders(lcd: &mut Lcd, rng: &mut Rng) {
                     for k in 0..p_size {
                         for j in 0..p_size {
                             if bits & 0x1 != 0 {
-                                layer_1.print_point_color_at((cx + j) as usize, (cy + k) as usize, black);
+                                layer_1.print_point_color_at(
+                                    (cx + j) as usize,
+                                    (cy + k) as usize,
+                                    black,
+                                );
                             } else {
-                                layer_1.print_point_color_at((cx + j) as usize, (cy + k) as usize, white);
+                                layer_1.print_point_color_at(
+                                    (cx + j) as usize,
+                                    (cy + k) as usize,
+                                    white,
+                                );
                             }
                         }
                     }
@@ -110,7 +118,6 @@ fn main() -> ! {
 
     let mut previous_button_state = pins.button.get();
     loop {
-
         // poll button state
         let current_button_state = pins.button.get();
         if current_button_state != previous_button_state {
