@@ -1,6 +1,7 @@
-# nrf52840
+# nrf52840-dk
 
 Rust experiments developed and tested on [nRF52840-DK](https://www.nordicsemi.com/Software-and-Tools/Development-Kits/nRF52840-DK)
+
 The following projects:
 - blinky
 
