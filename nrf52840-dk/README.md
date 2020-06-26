@@ -4,6 +4,10 @@ Rust experiments developed and tested on [nRF52840-DK](https://www.nordicsemi.co
 
 The following projects:
 - blinky
+- bme280-i2c
+- ssd1306-spi
+- st7789-spi
+
 
 In the rest of the document replace `<project>` with the project name:
 
