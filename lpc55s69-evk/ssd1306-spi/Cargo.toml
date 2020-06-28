@@ -4,16 +4,17 @@ version = "0.1.0"
 edition = "2018"
 
 [profile.release]
-opt-level = 'z'
-lto = true
+codegen-units = 1
 debug = true
+lto = true
+opt-level = 'z'
 
 [dependencies]
-lpc55-hal = "0.0.3"
-cortex-m-rt = "0.6.12"
 cortex-m = "0.6.2"
-panic-halt = "0.2.0"
+cortex-m-rt = "0.6.12"
 embedded-graphics = "0.6.2"
 embedded-hal = "0.2.4"
-ssd1306 = "0.3.1"
+lpc55-hal = "0.0.3"
+panic-halt = "0.2.0"
 rand = {version = "0.7.0", default-features = false, features = ["small_rng"]}
+ssd1306 = "0.3.1"
