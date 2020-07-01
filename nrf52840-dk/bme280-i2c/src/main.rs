@@ -10,11 +10,11 @@ use core::fmt::Write;
 use cortex_m_semihosting::{dbg, hio};
 
 use nrf52840_hal::{
-    prelude::*,
+    delay::*,
     gpio::*,
     pac,
+    prelude::*,
     twim::{self, Twim},
-    delay::*,
 };
 
 #[cortex_m_rt::entry]
@@ -34,7 +34,7 @@ fn main() -> ! {
 
     let pins = twim::Pins { scl, sda };
 
-    let i2c = Twim::new(p.TWIM0, pins, twim::Frequency::K400);
+    let i2c = Twim::new(p.TWIM0, pins, twim::Frequency::K100);
 
     let mut stdout = hio::hstdout().unwrap();
     writeln!(stdout, "I2C Init").ok();
