@@ -1,5 +1,9 @@
 # st7789-spi
 
+Ths project is based on ST7789 SPI controller. I tested it with this [1.54" Display Module](https://www.buydisplay.com/1-54-inch-tft-ips-lcd-display-module-135x240-spi-for-arduino-raspberry-pi).
+
+## Connections
+
 |    Board    | Screen |
 |:-----------:|:------:|
 |     GND     |  GND   |
