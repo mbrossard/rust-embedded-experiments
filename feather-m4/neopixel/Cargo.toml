@@ -1,0 +1,17 @@
+[package]
+name = "neopixel"
+version = "0.1.0"
+edition = "2018"
+
+[profile.release]
+opt-level = 'z'
+lto = true
+debug = true
+
+[dependencies]
+feather_m4 = "0.4.0"
+cortex-m-rt = "0.6.12"
+cortex-m = "0.6.2"
+panic-halt = "0.2.0"
+smart-leds = "0.3.0"
+ws2812-timer-delay = { version="0.3.0", features=["slow"]}
