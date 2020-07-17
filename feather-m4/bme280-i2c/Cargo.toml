@@ -13,6 +13,7 @@ feather_m4 = "0.4.0"
 panic-semihosting = "0.5.3"
 
 [profile.release]
-opt-level = 'z'
-lto = true
+codegen-units = 1
 debug = true
+lto = true
+opt-level = 'z'
