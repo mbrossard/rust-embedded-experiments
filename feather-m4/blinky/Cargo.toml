@@ -5,7 +5,7 @@ edition = "2018"
 
 [dependencies]
 feather_m4 = "0.4.0"
-cortex-m = "0.6.2"
+cortex-m = { version = "0.6.3", features = [ "const-fn" ] }
 cortex-m-rt = "0.6.12"
 panic-halt = "0.2.0"
 
