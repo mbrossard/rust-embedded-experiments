@@ -9,13 +9,13 @@ lto = true
 debug = true
 
 [dependencies]
-stm32f4 = {version = "0.11.0", features = ["stm32f411", "rt"]}
+apds9960 = "0.1.0"
+cortex-m = { version = "0.6.3", features = [ "const-fn" ] }
 cortex-m-rt = "0.6.12"
-cortex-m = "0.6.2"
 cortex-m-semihosting = "0.3.5"
+embedded-hal = "0.2.4"
+nb = "1.0.0"
 panic-halt = "0.2.0"
 panic-semihosting = "0.5.3"
+stm32f4 = {version = "0.11.0", features = ["stm32f411", "rt"]}
 stm32f4xx-hal = {version = "0.8.3", features = ["stm32f411", "rt"]}
-embedded-hal = "0.2.4"
-nb = "0.1.2"
-apds9960 = "0.1.0"
