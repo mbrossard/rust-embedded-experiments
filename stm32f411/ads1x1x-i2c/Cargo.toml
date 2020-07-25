@@ -3,11 +3,6 @@ name = "ads1x1x-i2c"
 version = "0.1.0"
 edition = "2018"
 
-[profile.release]
-opt-level = 'z'
-lto = true
-debug = true
-
 [dependencies]
 ads1x1x = "0.2.0"
 cortex-m = { version = "0.6.3", features = [ "const-fn" ] }
@@ -24,3 +19,9 @@ stm32f4xx-hal = {version = "0.8.3", features = ["stm32f411", "rt"]}
 default = ["ads1115"]
 ads1115 = []
 ads1015 = []
+
+[profile.release]
+codegen-units = 1
+debug = true
+lto = true
+opt-level = 'z'

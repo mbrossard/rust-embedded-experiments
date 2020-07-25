@@ -3,11 +3,6 @@ name = "usb-cdc"
 version = "0.1.0"
 edition = "2018"
 
-[profile.release]
-opt-level = 'z'
-lto = true
-debug = true
-
 [dependencies]
 cortex-m = { version = "0.6.3", features = [ "const-fn" ] }
 cortex-m-rt = "0.6.12"
@@ -19,3 +14,9 @@ stm32f4 = {version = "0.11.0", features = ["stm32f411", "rt"]}
 stm32f4xx-hal = {version = "0.8.3", features = ["stm32f411", "usb_fs", "rt"]}
 usb-device = "0.2.5"
 usbd-serial = "0.1.0"
+
+[profile.release]
+codegen-units = 1
+debug = true
+lto = true
+opt-level = 'z'

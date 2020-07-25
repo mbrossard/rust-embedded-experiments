@@ -3,12 +3,6 @@ name = "ssd1306-spi"
 version = "0.1.0"
 edition = "2018"
 
-[profile.release]
-opt-level = 'z'
-lto = true
-codegen-units = 1
-debug = true
-
 [dependencies]
 cortex-m = { version = "0.6.3", features = [ "const-fn" ] }
 cortex-m-rt = "0.6.12"
@@ -19,3 +13,9 @@ nrf52840-hal = "0.11.0"
 panic-halt = "0.2.0"
 rand = {version = "0.7.0", default-features = false, features = ["small_rng"]}
 ssd1306 = "0.3.1"
+
+[profile.release]
+codegen-units = 1
+debug = true
+lto = true
+opt-level = 'z'
