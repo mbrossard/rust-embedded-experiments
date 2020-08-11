@@ -25,6 +25,7 @@ impl DelayMs<u8> for LpcDelay {
         cortex_m::asm::delay(10000 * (ms as u32));
     }
 }
+
 impl DelayMs<u32> for LpcDelay {
     fn delay_ms(&mut self, ms: u32) {
         cortex_m::asm::delay(10000 * ms);
@@ -84,9 +85,10 @@ fn main() -> ! {
         .into_output_low();
 
     let mut delay = LpcDelay {};
+    let interface = display_interface_spi::SPIInterfaceNoCS::new(spi, dc);
     let mut display: GraphicsMode<_> = ssd1306::Builder::new()
-        .size(DisplaySize::Display128x64)
-        .connect_spi(spi, dc)
+        .size(DisplaySize128x64)
+        .connect(interface)
         .into();
     display.reset(&mut rst, &mut delay).unwrap();
     display.init().unwrap();
