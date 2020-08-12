@@ -4,8 +4,7 @@ version = "0.1.0"
 edition = "2018"
 
 [dependencies]
-atsamd-hal = { version = "0.8.2", features = ["samd51j19a"] }
-feather_m4 = "0.4.0"
+atsamd-hal = { git = "https://github.com/atsamd-rs/atsamd.git", features = ["samd51p19a"] }
 cortex-m-rt = "0.6.12"
 cortex-m = "0.6.2"
 panic-halt = "0.2.0"
