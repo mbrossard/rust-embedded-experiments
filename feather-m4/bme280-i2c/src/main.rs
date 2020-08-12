@@ -8,7 +8,7 @@ extern crate panic_semihosting;
 use bme280::BME280;
 use core::fmt::Write;
 use cortex_m_semihosting::{dbg, hio};
-use feather_m4::{pac::*, clock, delay, prelude::*};
+use feather_m4::{clock, delay, pac::*, prelude::*};
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
@@ -25,8 +25,15 @@ fn main() -> ! {
     let delay = delay::Delay::new(cp.SYST, &mut clocks);
     let mut pins = feather_m4::Pins::new(p.PORT);
 
-    let i2c = feather_m4::i2c_master(&mut clocks, 400_000u32.hz(), p.SERCOM2, &mut p.MCLK,
-                                         pins.sda, pins.scl, &mut pins.port);
+    let i2c = feather_m4::i2c_master(
+        &mut clocks,
+        400_000u32.hz(),
+        p.SERCOM2,
+        &mut p.MCLK,
+        pins.sda,
+        pins.scl,
+        &mut pins.port,
+    );
     let mut bme280 = BME280::new(i2c, 0x76, delay);
     // let mut bme280 = BME280::new(i2c, 0x77, delay);
 
