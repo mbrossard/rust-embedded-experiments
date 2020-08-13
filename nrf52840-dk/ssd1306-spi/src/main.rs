@@ -9,7 +9,7 @@ use nrf52840_hal::{delay::Delay, gpio::*, pac::Peripherals, spim::*};
 use embedded_graphics::{image::Image, image::ImageRaw, pixelcolor::BinaryColor, prelude::*};
 use embedded_hal::blocking::delay::DelayMs;
 use rand::{rngs::SmallRng, Rng, SeedableRng};
-use ssd1306::{prelude::*, Builder};
+use ssd1306::{self, prelude::*};
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
@@ -32,7 +32,12 @@ fn main() -> ! {
     let spi = Spim::new(p.SPIM0, spi_pins, Frequency::M8, MODE_3, 0);
 
     let mut delay = Delay::new(cp.SYST);
-    let mut display: GraphicsMode<_> = Builder::new().connect_spi(spi, dc).into();
+
+    let interface = display_interface_spi::SPIInterfaceNoCS::new(spi, dc);
+    let mut display: GraphicsMode<_> = ssd1306::Builder::new()
+        .size(DisplaySize128x64)
+        .connect(interface)
+        .into();
     display.reset(&mut rst, &mut delay).unwrap();
     display.init().unwrap();
 
