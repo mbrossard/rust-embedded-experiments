@@ -6,10 +6,11 @@ edition = "2018"
 [dependencies]
 cortex-m-rt = "0.6.12"
 cortex-m = { version = "0.6.3", features = [ "const-fn" ] }
+display-interface-i2c = "0.4.0"
 embedded-graphics = "0.6.2"
 panic-halt = "0.2.0"
 rand = {version = "0.7.0", default-features = false, features = ["small_rng"]}
-ssd1306 = "0.3.1"
+ssd1306 = "0.4.0"
 stm32f4 = {version = "0.11.0", features = ["stm32f411", "rt"]}
 stm32f4xx-hal = {version = "0.8.3", features = ["stm32f411", "rt"]}
 

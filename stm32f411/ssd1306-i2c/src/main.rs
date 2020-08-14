@@ -28,7 +28,11 @@ fn main() -> ! {
         let i2c = I2c::i2c1(dp.I2C1, (scl, sda), 400.khz(), clocks);
 
         // Set up the display
-        let mut disp: GraphicsMode<_> = SSD1306Builder::new().connect_i2c(i2c).into();
+        let interface = ssd1306::I2CDIBuilder::new().init(i2c);
+        let mut disp: GraphicsMode<_> = SSD1306Builder::new()
+            .size(DisplaySize128x64)
+            .connect(interface)
+            .into();
         disp.init().unwrap();
         disp.flush().unwrap();
 

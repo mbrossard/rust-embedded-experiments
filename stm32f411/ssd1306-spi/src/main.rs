@@ -45,7 +45,11 @@ fn main() -> ! {
         let mut cs = gpioa.pa2.into_push_pull_output();
         cs.set_low().unwrap();
 
-        Builder::new().connect_spi(spi, dc).into()
+        let interface = display_interface_spi::SPIInterfaceNoCS::new(spi, dc);
+        Builder::new()
+            .size(DisplaySize128x64)
+            .connect(interface)
+            .into()
     };
     #[cfg(feature = "spi1")]
     let mut rst = gpioa.pa4.into_push_pull_output();
@@ -60,7 +64,11 @@ fn main() -> ! {
         let mut cs = gpioa.pa10.into_push_pull_output();
         cs.set_low().unwrap();
 
-        Builder::new().connect_spi(spi, dc).into()
+        let interface = display_interface_spi::SPIInterfaceNoCS::new(spi, dc);
+        Builder::new()
+            .size(DisplaySize128x64)
+            .connect(interface)
+            .into()
     };
     #[cfg(feature = "spi2")]
     let mut rst = gpioa.pa8.into_push_pull_output();
